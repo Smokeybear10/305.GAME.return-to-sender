@@ -1,0 +1,320 @@
+{
+  "version": "iwsdk.scene.v1",
+  "units": "meters",
+  "components": {
+    "com.iwsdk.components.DomeGradient": {
+      "sky": [
+        0.035,
+        0.027,
+        0.022,
+        1
+      ],
+      "equator": [
+        0.085,
+        0.057,
+        0.038,
+        1
+      ],
+      "ground": [
+        0.022,
+        0.017,
+        0.013,
+        1
+      ],
+      "intensity": 1
+    },
+    "com.iwsdk.components.IBLGradient": {
+      "sky": [
+        0.42,
+        0.51,
+        0.6,
+        1
+      ],
+      "equator": [
+        0.32,
+        0.32,
+        0.3,
+        1
+      ],
+      "ground": [
+        0.13,
+        0.09,
+        0.065,
+        1
+      ],
+      "intensity": 0.5
+    }
+  },
+  "environment": {
+    "toneMapping": "aces",
+    "exposure": 1.08,
+    "shadows": true,
+    "shadowMapType": "pcf"
+  },
+  "resources": {},
+  "authoring": {
+    "views": [
+      {
+        "id": "hero",
+        "role": "hero",
+        "projection": "perspective",
+        "position": [
+          0,
+          1.57,
+          2.35
+        ],
+        "target": [
+          0,
+          1.28,
+          -1.1
+        ],
+        "fov": 49
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "theater",
+      "name": "The Little Theater",
+      "content": {
+        "type": "asset",
+        "asset": "theater"
+      }
+    },
+    {
+      "id": "cannon-left",
+      "name": "Captain Clatter",
+      "content": {
+        "type": "asset",
+        "asset": "cannon-captain",
+        "castShadow": true,
+        "receiveShadow": true
+      },
+      "transform": {
+        "position": [
+          -0.76,
+          0.99,
+          -1.5
+        ],
+        "rotationDeg": [
+          0,
+          25,
+          0
+        ]
+      },
+      "components": {
+        "ContactShadow": {
+          "size": [
+            0.5,
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "id": "portal-left",
+      "name": "Left Palm Portal",
+      "content": {
+        "type": "asset",
+        "asset": "portal-left"
+      },
+      "transform": {
+        "position": [
+          -0.25,
+          1.12,
+          -0.65
+        ],
+        "rotationDeg": [
+          0,
+          180,
+          0
+        ]
+      }
+    },
+    {
+      "id": "cannon-right",
+      "name": "Major Muddle",
+      "content": {
+        "type": "asset",
+        "asset": "cannon-gunner",
+        "castShadow": true,
+        "receiveShadow": true
+      },
+      "transform": {
+        "position": [
+          0.76,
+          0.99,
+          -1.5
+        ],
+        "rotationDeg": [
+          0,
+          -25,
+          0
+        ]
+      },
+      "components": {
+        "ContactShadow": {
+          "size": [
+            0.5,
+            0.5
+          ]
+        }
+      }
+    },
+    {
+      "id": "portal-right",
+      "name": "Right Palm Portal",
+      "content": {
+        "type": "asset",
+        "asset": "portal-right"
+      },
+      "transform": {
+        "position": [
+          0.25,
+          1.12,
+          -0.65
+        ],
+        "rotationDeg": [
+          0,
+          180,
+          0
+        ]
+      }
+    },
+    {
+      "id": "catch-cue-left",
+      "name": "Left Catch Mark",
+      "content": {
+        "type": "asset",
+        "asset": "catch-cue"
+      },
+      "transform": {
+        "position": [
+          -0.25,
+          1.12,
+          -0.65
+        ]
+      }
+    },
+    {
+      "id": "catch-cue-right",
+      "name": "Right Catch Mark",
+      "content": {
+        "type": "asset",
+        "asset": "catch-cue"
+      },
+      "transform": {
+        "position": [
+          0.25,
+          1.12,
+          -0.65
+        ]
+      }
+    },
+    {
+      "id": "warm-key",
+      "transform": {
+        "position": [
+          -1.8,
+          3.6,
+          1
+        ],
+        "rotationDeg": [
+          -43,
+          -32,
+          0
+        ]
+      },
+      "components": {
+        "DirectionalLight": {
+          "color": [
+            1,
+            0.91,
+            0.79,
+            1
+          ],
+          "intensity": 3.1,
+          "castShadow": true,
+          "shadowMapSize": "2048",
+          "shadowCameraSize": 4,
+          "shadowCameraNear": 0.1,
+          "shadowCameraFar": 10,
+          "shadowRadius": 3,
+          "shadowBias": -0.0002,
+          "shadowNormalBias": 0.002
+        }
+      }
+    },
+    {
+      "id": "fill",
+      "components": {
+        "HemisphereLight": {
+          "skyColor": [
+            0.55,
+            0.7,
+            0.84,
+            1
+          ],
+          "groundColor": [
+            0.25,
+            0.17,
+            0.12,
+            1
+          ],
+          "intensity": 0.48
+        }
+      }
+    },
+    {
+      "id": "rim",
+      "transform": {
+        "position": [
+          1,
+          3,
+          -2.4
+        ],
+        "rotationDeg": [
+          35,
+          165,
+          0
+        ]
+      },
+      "components": {
+        "DirectionalLight": {
+          "color": [
+            0.67,
+            0.8,
+            1,
+            1
+          ],
+          "intensity": 0.95
+        }
+      }
+    },
+    {
+      "id": "footlight-fill",
+      "name": "Warm footlight spill",
+      "transform": {
+        "position": [
+          0,
+          0.86,
+          0.12
+        ]
+      },
+      "components": {
+        "PointLight": {
+          "color": [
+            1,
+            0.73,
+            0.42,
+            1
+          ],
+          "intensity": 0.18,
+          "distance": 3.6,
+          "decay": 2,
+          "castShadow": false
+        }
+      }
+    }
+  ]
+}

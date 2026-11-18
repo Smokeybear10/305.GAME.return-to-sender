@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#211611" />
+    <meta name="description" content="Catch cannonballs in one hand. Send them back through the other. A toy theater game for VR and desktop." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23211611'/%3E%3Ccircle cx='20' cy='20' r='12' fill='none' stroke='%23b58a48' stroke-width='3'/%3E%3Ccircle cx='20' cy='20' r='8' fill='none' stroke='%23e9d8b7' stroke-width='1'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;650&family=Libre+Caslon+Display&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>Return to Sender — The Little Theater</title>
+  </head>
+  <body>
+    <div id="scene-container" aria-label="Return to Sender, a three-dimensional toy theater"></div>
+    <header class="masthead">
+      <div class="wordmark">
+        <span class="eyebrow">The little theater</span>
+        <h1>Return <em>to</em> Sender</h1>
+      </div>
+      <nav class="utilities" aria-label="Game options">
+        <button id="sound" class="quiet-button" type="button" aria-label="Toggle sound">Sound on</button>
+        <span class="nav-divider" aria-hidden="true"></span>
+        <button id="help-button" class="quiet-button" type="button">How to play</button>
+      </nav>
+    </header>
+
+    <section id="intro" class="paper-card intro-card" aria-labelledby="intro-title">
+      <div class="intro-copy">
+        <h2 id="intro-title">Send their shots back.</h2>
+        <p>Catch with one portal. Aim the other at a cannon.</p>
+      </div>
+      <button id="start" class="red-button" type="button">Play <span aria-hidden="true">→</span></button>
+      <span class="card-footnote">Three acts · Five chances</span>
+    </section>
+
+    <aside class="vr-entry" aria-label="Virtual reality">
+      <button id="vr" class="brass-button" type="button"><svg viewBox="0 0 24 18" fill="none" aria-hidden="true"><path d="M3 3h18l1 10-4 2-4-3h-4l-4 3-4-2L3 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 7h2m6 0h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Enter VR</button>
+      <p id="vr-note">Checking headset support…</p>
+    </aside>
+
+    <section id="hud" class="hud hidden" aria-label="Game progress">
+      <div class="act-marker"><span id="act-label" class="eyebrow">Act I</span><span id="act-title">A simple exchange</span></div>
+      <div class="score-marker"><span class="score-label">Village</span><span class="score-number"><b id="health">5</b><span class="score-max"> / 5</span></span></div>
+      <div class="score-marker"><span class="score-label">Streak</span><b id="returns" class="score-number">0</b></div>
+      <button id="pause" class="quiet-button pause-button" type="button" aria-label="Pause game">Pause <span aria-hidden="true">Ⅱ</span></button>
+    </section>
+
+    <p id="instruction" class="instruction hidden" role="status" aria-live="polite"></p>
+    <p id="feedback" class="feedback hidden" role="status" aria-live="polite"></p>
+    <div id="aim-reticle" class="aim-reticle hidden" aria-hidden="true"><span id="aim-label"></span></div>
+
+    <section id="controls" class="controls hidden" aria-label="Desktop controls">
+      <div class="portal-switch" aria-label="Selected portal">
+        <button id="select-left" class="portal-selector selected" type="button" aria-pressed="true"><kbd>Q</kbd> Left portal</button>
+        <button id="select-right" class="portal-selector" type="button" aria-pressed="false"><kbd>E</kbd> Right portal</button>
+      </div>
+      <span class="control-hint">Move pointer to aim <span>·</span> Drag a portal to move it <span>·</span> Scroll for depth</span>
+    </section>
+
+    <section id="ending" class="paper-card ending-card hidden" aria-labelledby="ending-title" aria-live="polite">
+      <span id="ending-eyebrow" class="card-kicker">The curtain falls</span>
+      <h2 id="ending-title">Village saved.</h2>
+      <p id="ending-description">All three acts complete.</p>
+      <dl class="ending-results">
+        <div><dt>Best streak this run</dt><dd id="ending-streak">0 / 8</dd></div>
+        <div><dt>Personal best</dt><dd id="ending-best">0</dd></div>
+      </dl>
+      <button id="replay" class="red-button" type="button">Play again <span aria-hidden="true">↻</span></button>
+    </section>
+
+    <footer class="page-footer"><span id="footer-state">Desktop</span><span class="footer-note">Hand tracking in VR</span></footer>
+
+    <div id="loading" class="loading" role="status" aria-live="polite"><div class="loading-seal" aria-hidden="true">R<span>↗</span></div><p>Setting the stage<span class="loading-dots">…</span></p></div>
+
+    <dialog id="help" class="help-dialog" aria-labelledby="help-title">
+      <button id="close-help" class="close-help" type="button" aria-label="Close instructions">×</button>
+      <span class="eyebrow">How to play</span>
+      <h2 id="help-title">One catches. One returns.</h2>
+      <p class="help-lead">A cannonball entering either portal comes out of the other. Defeat the cannons before five shots hit your village.</p>
+      <ol class="play-steps">
+        <li><span>1</span><p><strong>Catch.</strong> A pale mark shows where the next shot will pass. Move a portal there to catch it.</p></li>
+        <li><span>2</span><p><strong>Aim.</strong> Point the other portal at a cannon. The dotted line shows where the ball will go.</p></li>
+        <li><span>3</span><p><strong>Go around cover.</strong> Move the exit portal sideways when a shutter blocks your shot.</p></li>
+      </ol>
+      <div class="help-controls"><h3>Mouse & keyboard</h3><p>Move the pointer to aim. Drag either portal to move it.<br /><kbd>Q</kbd> / <kbd>E</kbd> switch portals · Scroll or <kbd>↑</kbd> / <kbd>↓</kbd> for depth<br /><kbd>Space</kbd> pause · <kbd>R</kbd> restart</p></div>
+      <div class="help-controls"><h3>VR hands</h3><p>Your palms control the portals. Lift both hands to start or play again. Keep both hands in view.</p></div>
+    </dialog>
+    <script type="module" src="/src/index.ts"></script>
+  </body>
+</html>
